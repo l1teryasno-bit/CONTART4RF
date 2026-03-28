@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Concert Russia 2026 — Билеты на концерты</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo" onclick="gp('home')">Concert 2026</div>
+  <ul class="nav-steps">
+    <li><button id="nb-home" onclick="gp('home')" class="active">Главная</button></li>
+    <li><button id="nb-artists" onclick="gp('artists')">Артисты</button></li>
+    <li><button id="nb-city" onclick="gp('city')">Города</button></li>
+    <li><button id="nb-concert" onclick="gp('concert')">Концерт</button></li>
+    <li><button id="nb-order" onclick="gp('order')">Заказ</button></li>
+  </ul>
+</nav>
+<div class="toast" id="toast"></div>
+
+<!-- HOME -->
+<div class="page active" id="page-home">
+  <div class="h-grid"></div><div class="h-glow"></div>
+  <div class="h-inner">
+    <div class="h-badge"><span class="h-dot"></span>Концерты по всей России · 2026</div>
+    <h1 class="ht">Concert<br/><em>Russia</em></h1>
+    <div class="h-sub">Скали Милано · OUDj · Буда · Фараон · Скриптонит · Макан · Алла Пугачёва · Филипп Киркоров</div>
+    <button class="h-cta" onclick="gp('artists')">Выбрать концерт →</button>
+    <div class="h-stats">
+      <div class="h-stat"><strong>8</strong><span>Артистов</span></div>
+      <div class="h-stat"><strong>6</strong><span>Городов</span></div>
+      <div class="h-stat"><strong>48</strong><span>Концертов</span></div>
+      <div class="h-stat"><strong>100%</strong><span>Гарантия</span></div>
+    </div>
+  </div>
+  <div class="sec" style="background:var(--bg2)">
+    <div class="si">
+      <div class="sl">Вопросы и ответы</div>
+      <div class="st">FAQ</div>
+      <div class="fql">
+        <div class="fi"><div class="fq" onclick="this.parentElement.classList.toggle('open')">Как получить билет?<span class="ico">+</span></div><div class="fa">После подтверждения оплаты билет придёт на email в течение 30 мин. Вход — по QR-коду.</div></div>
+        <div class="fi"><div class="fq" onclick="this.parentElement.classList.toggle('open')">Можно ли вернуть билет?<span class="ico">+</span></div><div class="fa">Да, в течение 7 дней после покупки, не позднее 48 часов до мероприятия.</div></div>
+        <div class="fi"><div class="fq" onclick="this.parentElement.classList.toggle('open')">Что входит в VIP?<span class="ico">+</span></div><div class="fa">Отдельная платформа перед сценой, вход без очереди, персональный бар и приветственный напиток.</div></div>
+        <div class="fi"><div class="fq" onclick="this.parentElement.classList.toggle('open')">Что нельзя вносить?<span class="ico">+</span></div><div class="fa">Профессиональные фото/видеокамеры, еда и напитки извне, алкоголь. Смартфоны — разрешены.</div></div>
+        <div class="fi"><div class="fq" onclick="this.parentElement.classList.toggle('open')">Возраст?<span class="ico">+</span></div><div class="fa">От 14 лет. На входе — паспорт или ID. До 14 лет только со взрослыми.</div></div>
+      </div>
+    </div>
+  </div>
+  <footer><p>Concert Russia · 2026 &nbsp;·&nbsp; <a href="#">@concertru2026</a></p></footer>
+</div>
+
+<!-- ARTISTS -->
+<div class="page" id="page-artists">
+  <div class="sec">
+    <div class="si">
+      <div class="sl">Шаг 1 из 3</div>
+      <div class="st">Выберите артиста</div>
+      <div class="ag" id="ag"></div>
+      <div class="brow">
+        <button class="btn btn-o" onclick="gp('home')">← Назад</button>
+        <button class="btn btn-g" onclick="doArtist()">Далее: выбор города →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CITY -->
+<div class="page" id="page-city">
+  <div class="sec">
+    <div class="si">
+      <div class="sl">Шаг 2 из 3</div>
+      <div class="st" id="city-title">Выберите город</div>
+      <div class="cg" id="cg"></div>
+      <div class="brow">
+        <button class="btn btn-o" onclick="gp('artists')">← Назад</button>
+        <button class="btn btn-g" onclick="doCity()">Далее: концерт →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONCERT -->
+<div class="page" id="page-concert">
+  <div class="sec" style="background:var(--bg2)">
+    <div class="si">
+      <div class="sl">Шаг 3 из 3 — Программа</div>
+      <div class="ch">
+        <div>
+          <div class="ch-a" id="ch-a">—</div>
+          <div class="ch-meta">
+            <div class="chm"><div class="chm-l">Дата</div><div class="chm-v" id="ch-d">—</div></div>
+            <div class="chm"><div class="chm-l">Город</div><div class="chm-v" id="ch-c">—</div></div>
+            <div class="chm"><div class="chm-l">Клуб / Площадка</div><div class="chm-v" id="ch-v">—</div></div>
+          </div>
+        </div>
+        <span class="live-badge">Билеты есть</span>
+      </div>
+      <div class="sl">Расписание вечера</div>
+      <div class="prog" style="margin-top:10px">
+        <div class="pr"><div class="pr-t">18:00</div><div><div class="pr-n">Открытие дверей</div><div class="pr-s">Вход по билетам, DJ-сет</div></div></div>
+        <div class="pr"><div class="pr-t">19:30</div><div><div class="pr-n">Разогрев</div><div class="pr-s">Специальный гость</div></div></div>
+        <div class="pr"><div class="pr-t">21:00</div><div><div class="pr-n" id="prog-main">Главное выступление</div><div class="pr-s">Основная программа · 2 часа</div></div></div>
+        <div class="pr"><div class="pr-t">23:00</div><div><div class="pr-n">Финал</div><div class="pr-s">Бис и закрытие</div></div></div>
+      </div>
+      <div class="sl">Выберите зону</div>
+      <div class="zg" id="zg" style="margin-top:10px"></div>
+      <p style="font-size:11px;color:var(--muted);text-align:center;margin-bottom:22px">🔒 SSL-защита · Возврат билетов до 7 дней</p>
+      <div class="brow">
+        <button class="btn btn-o" onclick="gp('city')">← Назад</button>
+        <button class="btn btn-g" onclick="doZone()">Оформить билет →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ORDER -->
+<div class="page" id="page-order">
+  <div class="sec">
+    <div class="si">
+      <div class="sl">Оформление</div>
+      <div class="st">Ваши данные</div>
+      <div class="og">
+        <div class="of">
+          <div class="ft">Контактные данные</div>
+          <div class="fr">
+            <div class="fg"><label>Имя *</label><input id="in" placeholder="Иван"/></div>
+            <div class="fg"><label>Фамилия *</label><input id="il" placeholder="Иванов"/></div>
+          </div>
+          <div class="fg">
+            <label>Email *</label>
+            <input type="email" id="ie" placeholder="ivan@mail.ru"/>
+            <div class="field-err" id="email-err">Введите корректный email (обязательно наличие @)</div>
+          </div>
+          <div class="fg"><label>Телефон *</label><input type="tel" id="ip" placeholder="+7 999 000 00 00"/></div>
+          <div class="fg">
+            <label>Количество билетов</label>
+            <div class="qr">
+              <button class="qb" onclick="chq(-1)">−</button>
+              <div class="qn" id="qshow">1</div>
+              <button class="qb" onclick="chq(1)">+</button>
+            </div>
+          </div>
+          <div class="brow">
+            <button class="btn btn-o" onclick="gp('concert')">← Назад</button>
+            <button class="btn btn-g" onclick="doOrder()">Перейти к оплате →</button>
+          </div>
+        </div>
+        <div class="os">
+          <div class="os-t">Итого</div>
+          <div class="or"><span>Артист</span><strong id="sa">—</strong></div>
+          <div class="or"><span>Город</span><strong id="sc">—</strong></div>
+          <div class="or"><span>Дата</span><strong id="sd">—</strong></div>
+          <div class="or"><span>Зона</span><strong id="sz">—</strong></div>
+          <div class="or"><span>Цена × кол-во</span><strong id="sca">—</strong></div>
+          <div class="od"></div>
+          <div class="ot"><span>Итого</span><span id="stot">—</span></div>
+          <p class="ssl">🔒 SSL-шифрование<br/>Официальная продажа</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAYMENT -->
+<div class="page" id="page-payment">
+  <div class="sec">
+    <div class="si">
+      <div class="sl">Оплата</div>
+      <div class="st">Перевод на карту</div>
+      <div class="pb">
+        <div class="pcard">
+          <div class="pcl">Сбербанк · RUB</div>
+          <div class="pcn">2204 3210 4435 6046</div>
+          <button class="cpb" onclick="copyCard()">📋 Копировать номер</button>
+        </div>
+        <div class="pab">
+          <div class="pal">Сумма к переводу</div>
+          <div class="pam" id="pam">—</div>
+        </div>
+        <p class="pi">Переведите точную сумму на карту выше. После перевода сделайте <strong>скриншот подтверждения</strong> в приложении банка и загрузите его ниже. <strong>Без скриншота заявка не рассматривается.</strong></p>
+        <div class="up" id="upa" onclick="document.getElementById('fi').click()">
+          <input type="file" id="fi" accept="image/*" onchange="handleFile(event)" style="display:none"/>
+          <div class="up-i">📎</div>
+          <div class="up-l">
+            <strong>Загрузите скриншот оплаты</strong>
+            Нажмите или перетащите файл<br/>
+            <span style="font-size:11px">JPG, PNG, WEBP</span>
+          </div>
+          <img id="prev"/>
+        </div>
+        <div class="err" id="uerr">⚠ Загрузите скриншот оплаты</div>
+        <div class="brow">
+          <button class="btn btn-o" onclick="gp('order')">← Назад</button>
+          <button class="btn btn-g" style="flex:1" onclick="doPay()">Подтвердить оплату ✓</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS -->
+<div class="page" id="page-success">
+  <div class="sec">
+    <div class="sb">
+      <div class="si-w">✓</div>
+      <div class="s-title">Готово!</div>
+      <div class="s-sub">Скриншот отправлен на проверку. Вот что будет дальше:</div>
+      <div class="ss-list">
+        <div class="ss"><div class="ss-n">1</div><div class="ss-t"><strong>Проверка платежа</strong><span>Сверяем перевод вручную — до 30 минут</span></div></div>
+        <div class="ss"><div class="ss-n">2</div><div class="ss-t"><strong>Билет на почту</strong><span>После подтверждения придёт QR-код на email</span></div></div>
+        <div class="ss"><div class="ss-n">3</div><div class="ss-t"><strong>Вход на концерт</strong><span>Покажите QR со смартфона на входе</span></div></div>
+      </div>
+      <button class="btn btn-g" onclick="gp('home')" style="margin:0 auto;display:flex">На главную</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
